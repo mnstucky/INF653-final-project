@@ -2,15 +2,15 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
-    include_once('../../config/Database.php');
-    include_once('../../models/Quote.php');
+    require('../../config/Database.php');
+    require('../../models/Quote.php');
 
     $database = new Database();
     $db = $database->connect();
 
     $quote = new Quote($db);
 
-    $quote->id = isset($_GET['id']) ? $_GET['id'] : die();
+    $quote->id = isset($_GET['id']) ? filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) : die();
 
     $quote->readOne();
 
@@ -21,4 +21,4 @@
         'quote' => $quote->quote
     );
 
-    print_r(json_encode($quoteArray));
+    echo json_encode($quoteArray);

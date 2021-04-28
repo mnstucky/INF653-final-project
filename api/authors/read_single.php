@@ -2,15 +2,15 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
-    include_once('../../config/Database.php');
-    include_once('../../models/Author.php');
+    require('../../config/Database.php');
+    require('../../models/Author.php');
 
     $database = new Database();
     $db = $database->connect();
 
     $author = new Author($db);
 
-    $author->id = isset($_GET['id']) ? $_GET['id'] : die();
+    $author->id = isset($_GET['id']) ? filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) : die();
 
     $author->readOne();
 
@@ -19,4 +19,4 @@
         'author' => $author->author,
     );
 
-    print_r(json_encode($authorArray));
+    echo json_encode($authorArray);

@@ -4,8 +4,8 @@
     header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-    include_once('../../config/Database.php');
-    include_once('../../models/Category.php');
+    require('../../config/Database.php');
+    require('../../models/Category.php');
 
     $database = new Database();
     $db = $database->connect();
@@ -14,7 +14,7 @@
 
     $data = json_decode(file_get_contents('php://input'));
 
-    if (!isset($data->category)) {
+    if (!isset($data->category) || empty($data->category)) {
         echo json_encode(
             array('message' => 'Category Not Created')
         );

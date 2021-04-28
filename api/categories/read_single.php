@@ -2,15 +2,15 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
-    include_once('../../config/Database.php');
-    include_once('../../models/Category.php');
+    require('../../config/Database.php');
+    require('../../models/Category.php');
 
     $database = new Database();
     $db = $database->connect();
 
     $category = new Category($db);
 
-    $category->id = isset($_GET['id']) ? $_GET['id'] : die();
+    $category->id = isset($_GET['id']) ? filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) : die();
 
     $category->readOne();
 
@@ -19,4 +19,4 @@
         'category' => $category->category,
     );
 
-    print_r(json_encode($categoryArray));
+    echo json_encode($categoryArray);
