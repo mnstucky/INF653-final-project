@@ -1,15 +1,18 @@
 <?php
     class Database {
-        private $host = 'localhost';
-        private $db_name = 'quotesdb';
-        private $username = 'root';
-        private $password = '';
         private $conn;
 
         public function connect() {
             $this->conn = null;
+            $url = getenv('JAWSDB_MARIA_URL');
+            $dbparts = parse_url($url);
+            $hostname = $dbparts['host'];
+            $username = $dbparts['user'];
+            $password = $dbparts['pass'];
+            $database = ltrim($dbparts['path'],'/');
+            $dsn = "mysql:host={$hostname};dbname={$database}";
             try {
-                $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->username, $this->password);
+                $this->conn = new PDO($dsn, $username, $password);
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $error) {
                 echo 'Connection Error: ' . $error->getMessage();
