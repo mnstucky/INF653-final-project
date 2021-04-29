@@ -135,7 +135,7 @@ class Quote
         $this->category = $row['category'];
         $this->author = $row['author'];
         $this->id = $row['id'];
-        $this->quote = $row['title'];
+        $this->quote = $row['quote'];
     }
 
     public function create()
