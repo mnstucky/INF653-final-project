@@ -72,65 +72,59 @@ shuffle($quotesArray);
 <body style="font-family: 'Noto Sans JP', sans-serif">
 
     <header>
-        <h1 class="is-size-1 has-text-centered" style="font-family: 'Orelega One', serif">Matt's Quotation API</h1>
+        <h1 class="is-size-1 has-text-centered" style="font-family: 'Orelega One', serif">Quotations</h1>
     </header>
 
-    <main class="section">
+    <main>
         <div class="container">
-            <form class="is-flex is-justify-content-center" action="./" method="GET" >
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
+            <form action="./" method="GET">
+                <div class="is-flex is-justify-content-center is-flex-wrap-wrap">
+                    <div class="field pr-2 pl-2">
                         <label class="label">Author</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="select">
-                            <select id="authorId" name="authorId">
-                                <option value="all">All</option>
-                                <?php foreach ($authors as $author) { ?>
-                                    <option value="<?php echo $author['id'] ?>"><?php echo $author['author'] ?></option>
-                                <?php } ?>
-                            </select>
+                        <div class="control">
+                            <div class="select">
+                                <select id="authorId" name="authorId">
+                                    <option value="all">All</option>
+                                    <?php foreach ($authors as $author) { ?>
+                                        <option value="<?php echo $author['id'] ?>"><?php echo $author['author'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal pl-4">
+                    <div class="field pr-2 pl-2">
                         <label class="label">Category</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="select">
-                            <select id="categoryId" name="categoryId">
-                                <option value="all">All</option>
-                                <?php foreach ($categories as $category) { ?>
-                                    <option value="<?php echo $category['id'] ?>"><?php echo $category['category'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="field is-horizontal">
-                    <div class="field-label">
-                        <!-- Left empty for spacing -->
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <button class="button is-primary">
-                                    Filter
-                                </button>
+                        <div class="control">
+                            <div class="select">
+                                <select id="categoryId" name="categoryId">
+                                    <option value="all">All</option>
+                                    <?php foreach ($categories as $category) { ?>
+                                        <option value="<?php echo $category['id'] ?>"><?php echo $category['category'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="is-flex is-justify-content-center pt-3">
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary">
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </form>
-            <div class="section is-flex is-justify-content-space-around is-flex-wrap-wrap">
+            <div class="section is-flex is-justify-content-space-around is-flex-wrap-wrap pt-2">
                 <?php if ($numQuotes == 0) { ?>
                     <p class="is-size-4">Sorry, no quotes match your chosen filters.</p>
                     <?php } else {
                     foreach ($quotesArray as $quote) { ?>
                         <div class="card mx-4 my-4" style="width: max(300px, 35vw);">
                             <div class="card-content">
-                                <p class="title">
+                                <p class="title is-size-4">
                                     <?php echo $quote['quote'] ?>
                                 </p>
                                 <p class="subtitle">
