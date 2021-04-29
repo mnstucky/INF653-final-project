@@ -19,4 +19,10 @@
         'category' => $category->category,
     );
 
-    echo json_encode($categoryArray);
+    if (empty($categoryArray['category'])) {
+        echo json_encode(
+            array('message' => "No category found.")
+        );
+    } else {
+        echo json_encode($categoryArray);
+    }
