@@ -178,7 +178,11 @@ class Quote
         $stmt->bindParam(':quote', $this->quote);
         $stmt->bindParam(':id', $this->id);
         if ($stmt->execute()) {
-            return true;
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
         printf('Error: %s.\n', $stmt->error);
         return false;
